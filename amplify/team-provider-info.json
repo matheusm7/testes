@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-speedrender-dev-9440f-authRole",
+      "UnauthRoleArn": "arn:aws:iam::381491875463:role/amplify-speedrender-dev-9440f-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::381491875463:role/amplify-speedrender-dev-9440f-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-speedrender-dev-9440f-deployment",
+      "UnauthRoleName": "amplify-speedrender-dev-9440f-unauthRole",
+      "StackName": "amplify-speedrender-dev-9440f",
+      "StackId": "arn:aws:cloudformation:us-east-1:381491875463:stack/amplify-speedrender-dev-9440f/f4abf250-fc1b-11ee-a9e7-0affcaee7343",
+      "AmplifyAppId": "drptbkcsjoh6k"
+    }
+  }
+}
