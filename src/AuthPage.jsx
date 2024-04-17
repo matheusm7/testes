@@ -1,19 +1,21 @@
 import React from 'react';
-import { withAuthenticator } from '@aws-amplify/ui-react';
+import { Authenticator } from '@aws-amplify/ui-react';
+import "./App.css"
+import "@aws-amplify/ui-react/styles.css"
 
 function AuthPage() {
   return (
     <div className="App">
-      <withAuthenticator>
+      <Authenticator>
         {({ signOut, user }) => (
           <>
             <p>Ei {user.username}, bem vindo ao site</p>
             <button onClick={signOut}>Sair</button>
           </>
         )}
-      </withAuthenticator>
+      </Authenticator>
     </div>
   );
 }
 
-export default withAuthenticator(AuthPage);
+export default Authenticator(AuthPage);

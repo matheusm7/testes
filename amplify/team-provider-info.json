@@ -11,5 +11,23 @@
       "StackId": "arn:aws:cloudformation:us-east-1:381491875463:stack/amplify-speedrender-dev-9440f/f4abf250-fc1b-11ee-a9e7-0affcaee7343",
       "AmplifyAppId": "drptbkcsjoh6k"
     }
+  },
+  "renderia": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-speedrender-renderia-281d5-authRole",
+      "UnauthRoleArn": "arn:aws:iam::381491875463:role/amplify-speedrender-renderia-281d5-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::381491875463:role/amplify-speedrender-renderia-281d5-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-speedrender-renderia-281d5-deployment",
+      "UnauthRoleName": "amplify-speedrender-renderia-281d5-unauthRole",
+      "StackName": "amplify-speedrender-renderia-281d5",
+      "StackId": "arn:aws:cloudformation:us-east-1:381491875463:stack/amplify-speedrender-renderia-281d5/b6dd2e10-fcdb-11ee-8e88-0edd09710a9f",
+      "AmplifyAppId": "drptbkcsjoh6k"
+    },
+    "categories": {
+      "auth": {
+        "speedrender84558a81": {}
+      }
+    }
   }
 }
