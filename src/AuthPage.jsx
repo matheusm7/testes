@@ -18,4 +18,4 @@ function AuthPage() {
   );
 }
 
-export default Authenticator(AuthPage);
+export default AuthPage;

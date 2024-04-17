@@ -3,7 +3,8 @@ import { Menu, X } from "lucide-react";
 import logo from "./assets/logo.png";
 import video1 from "./assets/video1.mp4";
 import { resourcesLinks, platformLinks, communityLinks } from "./constants";
-import { Link } from 'react-router-dom';  
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const App = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
@@ -56,8 +57,22 @@ const goToMaterialsPage = () => {
     setIsMobileDevice(isMobile());
   }, []);
 
-  const handleImageUpload = (file) => {
-    if (file) {
+  const handleImageUpload = async (imageUrl) => {
+    if (imageUrl) {
+      try{
+        const formData = new FormData();
+        formData.append('image', imageUrl);
+        const response = await axios.post('https://z38syim6s0.execute-api.us-east-1.amazonaws.com/upload-image', formData, {
+          headers:{
+            'Content-Type': 'multipart/form-data',
+            'Authorization': 'Bearer SEU_TOKEN_DE_AUTORIZAÇÃO_AQUI'
+          }
+        });
+
+        console.log("Resposta da API:", response.data);
+      }catch(error){
+        console.error('Erro ao enviar imagem para a API', error)
+      }
       setUploadedImage(URL.createObjectURL(file)); // Armazenar a imagem
       setUploadedImageName(file.name); // Armazenar o nome da imagem
     }
@@ -157,7 +172,7 @@ const goToMaterialsPage = () => {
       <button onClick={() => setShowUploadImageSection(false)} className="bg-gray-300 text-gray-800 py-2 px-3 rounded-md hover:bg-gray-400 transition-colors mr-2" style={{ fontWeight: "bold"}}>
         Voltar
       </button>
-      <button onClick={goToEnvironmentPage} className="bg-gradient-to-r from-pink-500 to-purple-800 text-white py-2 px-3 rounded-md hover:bg-pink-600 transition-transform duration-500 ease-in-out transform hover:scale-110" style={{ fontWeight: "bold"}}>
+      <button onClick={() => handleImageUpload(uploadedImage)} className="bg-gradient-to-r from-pink-500 to-purple-800 text-white py-2 px-3 rounded-md hover:bg-pink-600 transition-transform duration-500 ease-in-out transform hover:scale-110" style={{ fontWeight: "bold"}}>
   Avançar
 </button>
 
