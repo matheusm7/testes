@@ -1,0 +1,17 @@
+{
+  "dev": {
+    "configLevel": "project",
+    "useProfile": true,
+    "profileName": "default"
+  },
+  "speedaws": {
+    "configLevel": "project",
+    "useProfile": true,
+    "profileName": "default"
+  },
+  "phoneauth": {
+    "configLevel": "project",
+    "useProfile": true,
+    "profileName": "default"
+  }
+}

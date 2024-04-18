@@ -1,0 +1,59 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-speedrender-phoneauth-a71b3-authRole",
+      "UnauthRoleArn": "arn:aws:iam::381491875463:role/amplify-speedrender-phoneauth-a71b3-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::381491875463:role/amplify-speedrender-phoneauth-a71b3-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-speedrender-phoneauth-a71b3-deployment",
+      "UnauthRoleName": "amplify-speedrender-phoneauth-a71b3-unauthRole",
+      "StackName": "amplify-speedrender-phoneauth-a71b3",
+      "StackId": "arn:aws:cloudformation:us-east-1:381491875463:stack/amplify-speedrender-phoneauth-a71b3/919767b0-fd94-11ee-a533-0e051725baf3",
+      "AmplifyAppId": "drptbkcsjoh6k"
+    }
+  },
+  "auth": {
+    "speedrender847d2de8": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "PHONE_NUMBER"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-speedrender-phoneauth-a71b3-deployment/amplify-cfn-templates/auth/speedrender847d2de8-cloudformation-template.json",
+        "logicalId": "authspeedrender847d2de8"
+      },
+      "lastPushTimeStamp": "2024-04-18T15:04:43.257Z",
+      "output": {
+        "CreatedSNSRole": "arn:aws:iam::381491875463:role/sns847d2de8a71b3-phoneauth",
+        "UserPoolId": "us-east-1_8WNOewVk1",
+        "AppClientIDWeb": "31ftcurjjlvmc2tlv45r6d201p",
+        "AppClientID": "3urbfvrsc0qk488p3p95fn8r96",
+        "IdentityPoolId": "us-east-1:aa703357-7490-4b38-9ba4-8da0421337ac",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:381491875463:userpool/us-east-1_8WNOewVk1",
+        "IdentityPoolName": "speedrender847d2de8_identitypool_847d2de8__phoneauth",
+        "UserPoolName": "speedrender847d2de8_userpool_847d2de8"
+      },
+      "lastPushDirHash": "VUHO5+bpqWzYT9dBmMUPSCScAP4="
+    }
+  }
+}
