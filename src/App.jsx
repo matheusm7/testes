@@ -3,8 +3,7 @@ import { Menu, X } from "lucide-react";
 import logo from "./assets/logo.png";
 import video1 from "./assets/video1.mp4";
 import { resourcesLinks, platformLinks, communityLinks } from "./constants";
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { Link } from 'react-router-dom';  
 
 const App = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
@@ -14,6 +13,8 @@ const App = () => {
   const [showHoursDayPage, setShowHoursDayPage] = useState(false);
   const [showMaterialsPage, setShowMaterialsPage] = useState(false);
   const [showEnvironmentPage, setShowEnvironmentPage] = useState(false);
+  const [showAdditionalPage, setShowAdditionalPage] = useState(false);
+  const [showFinalPage, setShowFinalPage] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
   const [uploadedImageName, setUploadedImageName] = useState('');
   const [selectedMaterialOption, setSelectedMaterialOption] = useState('');
@@ -29,7 +30,9 @@ const handleAdvanceToHoursDayPage = () => {
   setShowEnvironmentPage(false);
   setShowMaterialsPage(false);
   setShowHoursDayPage(true);
+  setShowAdditionalPage(false); // Defina showAdditionalPage como false ao avançar para a página de horas do dia
 };
+
 const goToMaterialsPage = () => {
   setShowEnvironmentPage(false);
   setShowMaterialsPage(true);
@@ -38,7 +41,28 @@ const goToMaterialsPage = () => {
   setShowEstiloArquitetonico(false);
 };
 
-  
+const handleAdvanceToAdditionalPage = () => {
+  setShowHoursDayPage(false);
+  setShowCreateProjectsPage(false); // Defina showCreateProjectsPage como false ao avançar para a página adicional
+  setShowUploadImageSection(false); // Defina showUploadImageSection como false ao avançar para a página adicional
+  setShowEnvironmentPage(false); // Defina showEnvironmentPage como false ao avançar para a página adicional
+  setShowMaterialsPage(false); // Defina showMaterialsPage como false ao avançar para a página adicional
+  setShowAdditionalPage(true);
+  setShowFinalPage(false);
+};
+
+const handleAdvanceToFinalPage = () => {
+  setShowFinalPage(true);
+  setShowCreateProjectsPage(false);
+  setShowUploadImageSection(false);
+  setShowEnvironmentPage(false);
+  setShowMaterialsPage(false);
+  setShowHoursDayPage(false);
+  setShowAdditionalPage(false);
+};
+
+
+
   const handleMaterialOptionChange = (e) => {
     if (e.target.value === 'criativo') {
       setShowEstiloArquitetonico(true);
@@ -57,22 +81,8 @@ const goToMaterialsPage = () => {
     setIsMobileDevice(isMobile());
   }, []);
 
-  const handleImageUpload = async (imageUrl) => {
-    if (imageUrl) {
-      try{
-        const formData = new FormData();
-        formData.append('image', imageUrl);
-        const response = await axios.post('https://z38syim6s0.execute-api.us-east-1.amazonaws.com/upload-image', formData, {
-          headers:{
-            'Content-Type': 'multipart/form-data',
-            'Authorization': 'Bearer SEU_TOKEN_DE_AUTORIZAÇÃO_AQUI'
-          }
-        });
-
-        console.log("Resposta da API:", response.data);
-      }catch(error){
-        console.error('Erro ao enviar imagem para a API', error)
-      }
+  const handleImageUpload = (file) => {
+    if (file) {
       setUploadedImage(URL.createObjectURL(file)); // Armazenar a imagem
       setUploadedImageName(file.name); // Armazenar o nome da imagem
     }
@@ -172,7 +182,7 @@ const goToMaterialsPage = () => {
       <button onClick={() => setShowUploadImageSection(false)} className="bg-gray-300 text-gray-800 py-2 px-3 rounded-md hover:bg-gray-400 transition-colors mr-2" style={{ fontWeight: "bold"}}>
         Voltar
       </button>
-      <button onClick={() => handleImageUpload(uploadedImage)} className="bg-gradient-to-r from-pink-500 to-purple-800 text-white py-2 px-3 rounded-md hover:bg-pink-600 transition-transform duration-500 ease-in-out transform hover:scale-110" style={{ fontWeight: "bold"}}>
+      <button onClick={goToEnvironmentPage} className="bg-gradient-to-r from-pink-500 to-purple-800 text-white py-2 px-3 rounded-md hover:bg-pink-600 transition-transform duration-500 ease-in-out transform hover:scale-110" style={{ fontWeight: "bold"}}>
   Avançar
 </button>
 
@@ -314,7 +324,7 @@ const goToMaterialsPage = () => {
 
 
 
-{!showCreateProjectsPage && !showUploadImageSection && !showEnvironmentPage && !showMaterialsPage && !showHoursDayPage && (
+{!showCreateProjectsPage && !showUploadImageSection && !showEnvironmentPage && !showMaterialsPage && !showHoursDayPage && !showAdditionalPage && !showFinalPage && (
   <div className="flex flex-col items-center mt-6 lg:mt-10">
     <h1 className="text-4xl sm:text-6xl lg:text-7xl text-center tracking-wide mt-20">
       Seja bem-vindo ao futuro!<br/>
@@ -340,7 +350,6 @@ const goToMaterialsPage = () => {
     </div>
   </div>
 )}
-    {/* Sessão da página de horas do dia */}
   {/* Sessão da página de horas do dia */}
   {showHoursDayPage && (
   <div id="HoursDayPage" className="flex flex-col items-center mt-20">
@@ -421,15 +430,110 @@ const goToMaterialsPage = () => {
       <button onClick={goToMaterialsPage} className="bg-gray-300 text-gray-800 py-2 px-3 rounded-md hover:bg-gray-400 transition-colors mr-2" style={{ fontWeight: "bold" }}>
         Voltar
       </button>
-      <button onClick={handleAdvanceToHoursDayPage} className="bg-gradient-to-r from-pink-500 to-purple-800 text-white py-2 px-3 rounded-md hover:bg-pink-600 transition-transform duration-500 ease-in-out transform hover:scale-110" style={{ fontWeight: "bold" }}>
+      <button onClick={handleAdvanceToAdditionalPage} className="bg-gradient-to-r from-pink-500 to-purple-800 text-white py-2 px-3 rounded-md hover:bg-pink-600 transition-transform duration-500 ease-in-out transform hover:scale-110" style={{ fontWeight: "bold" }}>
+        Avançar
+      </button>
+    </div>
+  </div>
+)}
+{/* Sessão da AdditionalPage */}
+{showAdditionalPage && (
+  <div id="AdditionalPage" className="flex flex-col items-center mt-20">
+    <div className="bg-gray-100 p-6 rounded-lg shadow-md md:flex md:items-center md:justify-center max-w-screen-md">
+      {/* Esquerda: Textos com Checkboxes */}
+      <div className="md:w-1/2 md:mr-6 mb-6 md:mb-0 text-left">
+        <h2 className="mb-2 text-2xl font-semibold text-black">Título da AdditionalPage</h2>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <input type="checkbox" id="people" name="people" className="mr-2" />
+            <label htmlFor="people">Pessoas</label><br/>
+            <input type="checkbox" id="dog" name="dog" className="mr-2" />
+            <label htmlFor="dog">Cachorro</label><br/>
+            <input type="checkbox" id="car" name="car" className="mr-2" />
+            <label htmlFor="car">Carro</label><br/>
+            <input type="checkbox" id="sculpture" name="sculpture" className="mr-2" />
+            <label htmlFor="sculpture">Escultura</label><br/>
+            <input type="checkbox" id="indoor-lighting" name="indoor-lighting" className="mr-2" />
+            <label htmlFor="indoor-lighting">Iluminação Interna Acesa</label><br/>
+            <input type="checkbox" id="outdoor-lighting" name="outdo  or-lighting" className="mr-2" />
+            <label htmlFor="outdoor-lighting">Iluminação Externa Acesa</label><br/>
+            <input type="checkbox" id="vegetation" name="vegetation" className="mr-2" />
+            <label htmlFor="vegetation">Vegetação</label><br/>
+            <input type="checkbox" id="furniture" name="furniture" className="mr-2" />
+            <label htmlFor="furniture">Mobília</label><br/>
+          </div>
+          <div>
+            <input type="checkbox" id="water-elements" name="water-elements" className="mr-2" />
+            <label htmlFor="water-elements">Elementos de Água</label><br/>
+            <input type="checkbox" id="street-art" name="street-art" className="mr-2" />
+            <label htmlFor="street-art">Arte de Rua</label><br/>
+            <input type="checkbox" id="signage" name="signage" className="mr-2" />
+            <label htmlFor="signage">Sinalização</label><br/>
+            <input type="checkbox" id="playground" name="playground" className="mr-2" />
+            <label htmlFor="playground">Playground</label><br/>
+            <input type="checkbox" id="sports-equipment" name="sports-equipment" className="mr-2" />
+            <label htmlFor="sports-equipment">Equipamentos esportivos</label><br/>
+          </div>
+        </div>
+      </div>
+      {/* Direita: Imagem carregada */}
+      <div className="md:w-1/2 md:ml-6 md:pl-6">
+        {uploadedImage && (
+          <div>
+            <img src={uploadedImage} alt="Uploaded" className="h-auto mx-auto mb-2 rounded-md" style={{ maxWidth: '320px' }} />
+            <p className="text-sm text-gray-600 mb-5">{uploadedImageName}</p>
+          </div>
+        )}
+      </div>
+    </div>
+    {/* Botões Voltar e Avançar */}
+    <div className="flex justify-center mt-6">
+      <button onClick={handleAdvanceToHoursDayPage} className="bg-gray-300 text-gray-800 py-2 px-3 rounded-md hover:bg-gray-400 transition-colors mr-2" style={{ fontWeight: "bold" }}>
+        Voltar
+      </button>
+      <button onClick={handleAdvanceToFinalPage} className="bg-gradient-to-r from-pink-500 to-purple-800 text-white py-2 px-3 rounded-md hover:bg-pink-600 transition-transform duration-500 ease-in-out transform hover:scale-110"style={{ fontWeight: "bold" }}>
+        Avançar
+      </button>
+      </div>
+      </div>
+    )}
+
+{showFinalPage && (
+  <div id="FinalPage" className="flex flex-col items-center mt-20">
+    <div className="bg-gray-100 p-6 rounded-lg shadow-md md:flex md:items-center md:justify-center max-w-screen-md">
+      {/* Esquerda: Texto */}
+      <div className="md:w-1/2 md:mr-6 mb-6 md:mb-0 text-left">
+        <h2 className="mb-2 text-1xl font-semibold text-black">Digite seu e-mail:</h2>
+        <input type="email" id="email" name="email" className="border border-gray-300 rounded-md px-3 py-2 w-full mb-4" placeholder="Digite seu e-mail" />
+        <h2 className="mb-2 text-1xl font-semibold text-black">Qual seu nome?</h2>
+        <input type="text" id="fullName" name="fullName" className="border border-gray-300 rounded-md px-3 py-2 w-full mb-4" placeholder="Digite seu nome" />
+      </div>
+      {/* Direita: Imagem carregada */}
+      <div className="md:w-1/2 md:ml-6 md:pl-6 flex items-center justify-center">
+        {uploadedImage && (
+          <div>
+            <img src={uploadedImage} alt="Uploaded" className="max-w-full h-auto mx-auto mb-2 rounded-md" style={{ maxWidth: '320px' }} />
+            <p className="text-sm text-gray-600 mb-5">{uploadedImageName}</p>
+          </div>
+        )}
+      </div>
+    </div>
+    {/* Botões Voltar e Avançar */}
+    <div className="flex justify-center mt-6">
+      <button onClick={handleAdvanceToAdditionalPage} className="bg-gray-300 text-gray-800 py-2 px-3 rounded-md hover:bg-gray-400 transition-colors mr-2" style={{ fontWeight: "bold" }}>
+        Voltar
+      </button>
+      <button className="bg-gradient-to-r from-pink-500 to-purple-800 text-white py-2 px-3 rounded-md hover:bg-pink-600 transition-transform duration-500 ease-in-out transform hover:scale-110" style={{ fontWeight: "bold" }}>
         Avançar
       </button>
     </div>
   </div>
 )}
 
+
+
 {/* Sessão da Footer Page */}
-{!showCreateProjectsPage && !showUploadImageSection && !showEnvironmentPage && !showMaterialsPage && !showHoursDayPage && (
+{!showCreateProjectsPage && !showUploadImageSection && !showEnvironmentPage && !showMaterialsPage && !showHoursDayPage && !showAdditionalPage && !showFinalPage && (
   <footer className="mt-20 border-t py-10 border-neutral-700 text-center">
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mx-auto max-w-7xl">
       <div>

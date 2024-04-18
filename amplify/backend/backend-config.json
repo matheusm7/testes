@@ -1,6 +1,6 @@
 {
   "auth": {
-    "speedrender84558a81": {
+    "speedrender847d2de8": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -17,7 +17,7 @@
         ],
         "socialProviders": [],
         "usernameAttributes": [
-          "EMAIL"
+          "PHONE_NUMBER"
         ],
         "verificationMechanisms": [
           "EMAIL"
